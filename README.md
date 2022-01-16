@@ -8,4 +8,5 @@ My name is Sabrina Eisenberg. I am a ~~fifth~~ first year PhD student in the CNS
 - religiosity. 
 
 **I am excited to learn more about R and GitHub!** 
+
 ![](https://www.icegif.com/wp-content/uploads/icegif-1669.gif)
