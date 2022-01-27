@@ -15,14 +15,35 @@ library(tidyverse)
 plastic_waste <- read_csv(here::here("data", "plastic-waste.csv"))
 ```
 
+## Warm up 
+Notice that some cells in the data have the value NA - what does this mean? 
+
+This is where there are missing values 
+
 ## Exercises
+
+```{r plastic waste per cap dist}
+
+ggplot(data = plastic_waste) +
+  aes(x = plastic_waste_per_cap) +
+  geom_histogram(binwidth = 0.2)
+
+```
+
+```{r filter greater than 3.5}
+plastic_waste |>
+  filter(plastic_waste_per_cap > 3.5)
+```
+This code finds the data points that are greater than the specified data point (3.5)
+
+My brief research shows that Trinidad is a small island with many peopel that does not have a recycling system proportionate to its waste production. 
 
 ### Exercise 1
 
-Remove this text, and add your answer for Exercise 1 here.
 
 ```{r plastic-waste-continent}
-# insert code here
+
+
 ```
 
 ### Exercise 2
