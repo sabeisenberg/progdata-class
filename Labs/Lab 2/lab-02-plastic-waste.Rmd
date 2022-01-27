@@ -43,6 +43,11 @@ My brief research shows that Trinidad is a small island with many peopel that do
 
 ```{r plastic-waste-continent}
 
+ggplot(data = plastic_waste) +
+  aes(x = plastic_waste_per_cap) +
+  geom_histogram(binwidth = 0.2) + 
+  facet_wrap (~continent)
+  
 
 ```
 
