@@ -51,6 +51,10 @@ ggplot(data = plastic_waste) +
 
 ```
 
+
+### Exercise 2
+
+
 ```{r plastic-waste-density}
 
 ggplot(data = plastic_waste) +
@@ -59,6 +63,10 @@ ggplot(data = plastic_waste) +
   facet_wrap(~continent)
 
 ```
+
+
+### Exercise 3
+
 
 ```{r plastic-waste-density-hist}
 
@@ -69,9 +77,11 @@ ggplot(data = plastic_waste) +
 ```
 
 
-### Exercise 2
+### Exercise 4
 
-```{r plastic-waste-box-plot}
+The density plot and jitter show the distribution of the data points better than the box plot. It accounts more for outliers as well. 
+
+```{r plastic-waste-violin}
 
 ggplot(data = plastic_waste) +
   aes(x = continent,
@@ -89,11 +99,30 @@ ggplot(data = plastic_waste) +
 
 ```
 
-The density plot and jitter show the distribution of the data points better than the box plot. It accounts more for outliers as well. 
 
-### Exercise 3
 
-```{r plastic waste-mismanaged scatter}
+
+### Exercise 5
+
+Describe the relationship
+It seems like there is a positive relationship between the two variables with increasing variability. 
+
+```{r plastic-waste-mismanaged}
+
+ggplot(data = plastic_waste) +
+  aes(x = plastic_waste_per_cap,
+      y = mismanaged_plastic_waste_per_cap) +
+  geom_point()
+
+```
+
+### Exercise 6
+
+
+There seems to be a steeper positive relationship for Africa and Asia. North America, Europe, and Oceana seem to have more variability. Europe and North America's positive relationship seems to have a smaller slope. 
+
+
+```{r plastic-waste-mismanaged-continent}
 
 ggplot(data = plastic_waste) +
   aes(x = plastic_waste_per_cap,
@@ -102,14 +131,11 @@ ggplot(data = plastic_waste) +
 
 ```
 
-1. Describe the relationship
-It seems like there is a positive relationship between the two variables with increasing variability. 
+### Exercise 7
 
-2. There seems to be a steeper positive relationship for Africa and Asia. North America, Europe, and Oceana seem to have more variability. Europe and North America's positive relationship seems to have a smaller slope. 
+Remove this text, and add your answer for Exercise 7 here.
 
-3. 
-
-```{r plastic waste total pop}
+```{r plastic-waste-population-total}
 
 ggplot(data = plastic_waste) +
   aes(x = total_pop,
@@ -119,7 +145,7 @@ ggplot(data = plastic_waste) +
 
 ```
 
-```{r plastic waste total coastal pop}
+```{r plastic-waste-population-coastal}
 
 ggplot(data = plastic_waste) +
   aes(x = coastal_pop,
@@ -127,44 +153,7 @@ ggplot(data = plastic_waste) +
   geom_point() +
   geom_smooth()
 
-```
 
-# Which has better fit? 
-
-### Exercise 4
-
-Remove this text, and add your answer for Exercise 4 here.
-
-```{r plastic-waste-violin}
-# insert code here
-```
-
-### Exercise 5
-
-Remove this text, and add your answer for Exercise 5 here.
-
-```{r plastic-waste-mismanaged}
-# insert code here
-```
-
-### Exercise 6
-
-Remove this text, and add your answer for Exercise 6 here.
-
-```{r plastic-waste-mismanaged-continent}
-# insert code here
-```
-
-### Exercise 7
-
-Remove this text, and add your answer for Exercise 7 here.
-
-```{r plastic-waste-population-total}
-# insert code here
-```
-
-```{r plastic-waste-population-coastal}
-# insert code here
 ```
 
 ### Exercise 8
