@@ -71,6 +71,25 @@ ggplot(data = plastic_waste) +
 
 ### Exercise 2
 
+```{r plastic-waste-box-plot}
+
+ggplot(data = plastic_waste) +
+  aes(x = continent,
+      y = plastic_waste_per_cap,
+      fill = continent) +
+  geom_jitter(height = 0,
+              width = .4) +
+  geom_boxplot(color = "black",
+               alpha = .5) +
+    ggdist::stat_slab(height = .3,
+                    color = "black",
+                    size = .2,
+                    alpha = .5,
+                    position = position_nudge(y = .2))
+
+```
+
+The density plot and jitter show the distribution of the data points better than the box plot. It accounts more for outliers as well. 
 
 ### Exercise 3
 
