@@ -93,7 +93,43 @@ The density plot and jitter show the distribution of the data points better than
 
 ### Exercise 3
 
-Remove this text, and add your answer for Exercise 3 here.
+```{r plastic waste-mismanaged scatter}
+
+ggplot(data = plastic_waste) +
+  aes(x = plastic_waste_per_cap,
+      y = mismanaged_plastic_waste_per_cap, color = continent) +
+  geom_point()
+
+```
+
+1. Describe the relationship
+It seems like there is a positive relationship between the two variables with increasing variability. 
+
+2. There seems to be a steeper positive relationship for Africa and Asia. North America, Europe, and Oceana seem to have more variability. Europe and North America's positive relationship seems to have a smaller slope. 
+
+3. 
+
+```{r plastic waste total pop}
+
+ggplot(data = plastic_waste) +
+  aes(x = total_pop,
+      y = plastic_waste_per_cap) +
+  geom_point() +
+  geom_smooth()
+
+```
+
+```{r plastic waste total coastal pop}
+
+ggplot(data = plastic_waste) +
+  aes(x = coastal_pop,
+      y = plastic_waste_per_cap) +
+  geom_point() +
+  geom_smooth()
+
+```
+
+# Which has better fit? 
 
 ### Exercise 4
 
