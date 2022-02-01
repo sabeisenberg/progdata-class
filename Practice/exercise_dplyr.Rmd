@@ -62,7 +62,7 @@ select(gapminder, continent, everything(gapminder))
 # compare
 select(gapminder, cont = continent) #new_name = old_name, this will only select continent 
 
-rename(gapminder, cont = continent) # this will produce the whole data set with the replaced name 
+rename(gapminder, cont = continent, Year = year) # this will produce the whole data set with the replaced name 
 ```
 
 
@@ -70,20 +70,21 @@ rename(gapminder, cont = continent) # this will produce the whole data set with 
 
 1. Order by year.
 
-```{r}
-arrange(gapminder, FILL_THIS_IN)
+```{r arrange by year}
+arrange(gapminder, year)
 ```
 
 2. Order by year, in descending order.
 
-```{r}
-arrange(gapminder, FILL_THIS_IN)
+```{r order by year descending}
+arrange(gapminder, -year)
+        
 ```
 
 3. Order by year, then by life expectancy.
 
-```{r}
-arrange(gapminder, FILL_THIS_IN, FILL_THIS_IN)
+```{r order by year and then lifeExp}
+arrange(gapminder, year, lifeExp)
 ``` 
 
 # Back to the Guide
