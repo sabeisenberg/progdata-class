@@ -58,11 +58,11 @@ select(gapminder, continent, everything(gapminder))
 
 5. Rename `continent` to `cont`.
 
-```{r}
+```{r rename continent to cont}
 # compare
-select(gapminder, FILL_THIS_IN)
+select(gapminder, cont = continent) #new_name = old_name, this will only select continent 
 
-rename(gapminder, FILL_THIS_IN)
+rename(gapminder, cont = continent) # this will produce the whole data set with the replaced name 
 ```
 
 
