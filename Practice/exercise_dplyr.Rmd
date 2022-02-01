@@ -46,13 +46,14 @@ select(gapminder, country:lifeExp)
 3. Select all variables, except `lifeExp`.
 
 ```{r select all but lifeExp}
-select(gapminder, FILL_THIS_IN)
+select(gapminder, country:year) 
+select(gapminder, -lifeExp)
 ```
 
 4. Put `continent` first. Hint: use the `everything()` function.
 
-```{r}
-select(gapminder, FILL_THIS_IN, FILL_THIS_IN)
+```{r put continent first}
+select(gapminder, continent, everything(gapminder))
 ```
 
 5. Rename `continent` to `cont`.
