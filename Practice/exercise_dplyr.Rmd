@@ -102,7 +102,11 @@ Do `select()` Task 1 and `arrange()` Task 3 together with a pipe.
 
 Select `year`, `lifeExp`, `country` from the `gapminder`, then arrange in order by year and life expectancy.
 
-```{r}
+```{r select and arrange pipe}
+
+gapminder |> 
+  select(year, lifeExp, country) |> 
+  arrange(-year)
 
 ```
 
