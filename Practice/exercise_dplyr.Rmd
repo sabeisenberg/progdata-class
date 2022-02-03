@@ -115,23 +115,35 @@ gapminder |>
 
 1. Only keep data with population greater than 100 million.
 
-```{r}
+```{r filter pop greater than 100 mill}
 gapminder |>
-  filter(FILL_THIS_IN)
+  filter(pop>100000000)
 ```
 
 2. Only keep data _from Asia_ with population greater than 100 million.
 
-```{r}
+```{r keep Asian greater 100 mill}
 gapminder |>
-  filter(FILL_THIS_IN)
+  filter(continent == "Asia", pop > 100000000) #can also use & 
 ```
 
 3. Only keep data _from the countries Brazil and China_ with population greater than 100 million.
 
-```{r}
+```{r Brazil China pop 100 mill}
+#gapminder |>
+ # filter((country == "Brazil" & country == "China") & pop > 100000000)
+
+# gapminder |>
+#  filter((country == c("Brazil", "China")) & pop > 100000000)
+# with this, it will ask first "is this equal to china" for 1, "is this equal to brazil" for 2. It will ask one at a time, so there will be missing data. If you want "any of these" use %in%
+
 gapminder |>
-  filter(FILL_THIS_IN)
+  filter(country %in% c("China", "Brazil") & pop > 100000000)
+
+allowed_countries <- c("China", "Brazil")
+
+gapminder |>
+  filter(country %in% allowed_countries & pop > 100000000)
 ```
 
 
