@@ -163,27 +163,34 @@ Let's get:
 - `grossGDP`: Multiplying GPD per capita by population
 - `gdpBill`: GDP in billions, rounded to two decimals.
 
-```{r}
+```{r gross GDP to billions 2 dec}
 gapminder |>
-  mutate(FILL_THIS_IN)
+  mutate(grossGDP = gdpPercap*pop, 
+         gdpBill = round(grossGDP/1000000000,2))
 ```
 
 Notice the backwards compatibility! No need for loops!
 
 Try the same thing, but with `transmute` (drops all other variables). 
 
-```{r}
+```{r transmute v mutate}
 gapminder |>
-  transmute(FILL_THIS_IN)
+  transmute(grossGDP = gdpPercap*pop)
 ```
 
 The `if_else` function is useful for changing certain elements in a data frame.
 
 Example: Suppose Canada's 1952 life expectancy was mistakenly entered as 68.8 in the data frame, but is actually 70. Fix it using `if_else` and `mutate`. 
 
-```{r}
+```{r if else life exp}
 gapminder |>
-  mutate(FILL_THIS_IN)
+  mutate(lifeExp = if_else(
+        country == "Canada" & year == 1952, 
+        true = 70, 
+        false = lifeExp))
+
+#in the condition that country is Canada and year is 1952, keep the lifeExp if it is 70 but false if it is not. 
+
 ```
 
 Your turn: 
