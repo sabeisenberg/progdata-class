@@ -36,7 +36,7 @@ plastic_waste |>
 ```
 This code finds the data points that are greater than the specified data point (3.5)
 
-My brief research shows that Trinidad is a small island with many peopel that does not have a recycling system proportionate to its waste production. 
+My brief research shows that Trinidad is a small island with many people that does not have a recycling system proportionate to its waste production. 
 
 ### Exercise 1
 
