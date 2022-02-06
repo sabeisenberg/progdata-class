@@ -10,4 +10,3 @@ names(penguins) # column names
 
 sd(penguins$flipper_length_mm, na.rm = TRUE) # standard deviation flipper length
 mm 
-
