@@ -125,8 +125,8 @@ ggplot(data = plastic_waste) +
 
 ### 17.4.3 Exercise 3 
 
-Describe the relationship
-It seems like there is a positive relationship between the two variables with increasing variability. 
+1. 
+
 
 ```{r plastic-waste-mismanaged}
 
@@ -137,11 +137,9 @@ ggplot(data = plastic_waste) +
 
 ```
 
-### Exercise 6
+It seems like there is a positive relationship between the two variables with increasing variability. 
 
-
-There seems to be a steeper positive relationship for Africa and Asia. North America, Europe, and Oceana seem to have more variability. Europe and North America's positive relationship seems to have a smaller slope. 
-
+2. 
 
 ```{r plastic-waste-mismanaged-continent}
 
@@ -152,9 +150,10 @@ ggplot(data = plastic_waste) +
 
 ```
 
-### Exercise 7
+There seems to be a steeper positive relationship for Africa and Asia. North America, Europe, and Oceana seem to have more variability. Europe and North America's positive relationship seems to have a smaller slope.
 
-Remove this text, and add your answer for Exercise 7 here.
+3. 
+
 
 ```{r plastic-waste-population-total}
 
@@ -176,6 +175,10 @@ ggplot(data = plastic_waste) +
 
 
 ```
+
+
+It is hard to tell with the outliers, but it seems like the coastal population graph has a stronger association 
+
 
 ### Exercise 8
 
