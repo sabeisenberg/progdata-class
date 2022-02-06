@@ -15,12 +15,12 @@ library(tidyverse)
 plastic_waste <- read_csv(here::here("data", "plastic-waste.csv"))
 ```
 
-## Warm up 
+## 17.3 Warm up 
 Notice that some cells in the data have the value NA - what does this mean? 
 
 This is where there are missing values 
 
-## Exercises
+## 17.4 Exercises
 
 ```{r plastic waste per cap dist}
 
@@ -38,8 +38,9 @@ This code finds the data points that are greater than the specified data point (
 
 My brief research shows that Trinidad is a small island with many people that does not have a recycling system proportionate to its waste production. 
 
-### Exercise 1
+## 17.4.1 Exercise 1
 
+1. 
 
 ```{r plastic-waste-continent}
 
@@ -51,31 +52,31 @@ ggplot(data = plastic_waste) +
 
 ```
 
-
-### Exercise 2
+It seems that most continents have low plastic waste per cap. It seems that North American and Asian countries have a wider range of plastic waste per cap, with North America having an outlier. It seems that, on average, Africa, Asia, Europe, and North America have similar plastic waste per cap. It is harder to compare the Oceania and South America because they have less data points. 
 
 
 ```{r plastic-waste-density}
 
 ggplot(data = plastic_waste) +
   aes(x = plastic_waste_per_cap) +
-  geom_density() +
+  geom_density(aes(y = after_stat(count))) +
   facet_wrap(~continent)
 
 ```
 
-
-### Exercise 3
-
+2.
 
 ```{r plastic-waste-density-hist}
 
 ggplot(data = plastic_waste) +
-  aes(x = plastic_waste_per_cap) +
-  geom_density(aes(y = after_stat(count), fill = continent, color = continent), alpha = 0.1) 
+  aes(x = plastic_waste_per_cap, fill = continent, color = continent) +
+  geom_density(aes(y = after_stat(count)), alpha = .3)
 
 ```
 
+3. 
+
+We define alpha level in the geom so that it applies to all arguments in the geom (global) and all layers. 
 
 ### Exercise 4
 
