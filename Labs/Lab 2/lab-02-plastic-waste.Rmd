@@ -38,7 +38,7 @@ This code finds the data points that are greater than the specified data point (
 
 My brief research shows that Trinidad is a small island with many people that does not have a recycling system proportionate to its waste production. 
 
-## 17.4.1 Exercise 1
+### 17.4.1 Exercise 1
 
 1. 
 
@@ -78,11 +78,32 @@ ggplot(data = plastic_waste) +
 
 We define alpha level in the geom so that it applies to all arguments in the geom (global) and all layers. 
 
-### Exercise 4
+### 17.4.2 Exercise 2 
 
-The density plot and jitter show the distribution of the data points better than the box plot. It accounts more for outliers as well. 
+1. 
 
-```{r plastic-waste-violin}
+```{r plastic waste box}
+ggplot(data = plastic_waste) +
+  aes(x = continent,
+      y = plastic_waste_per_cap,
+      fill = continent) +
+  geom_boxplot()
+```
+
+2. 
+```{r boxplot with data }
+ggplot(data = plastic_waste) +
+  aes(x = continent,
+      y = plastic_waste_per_cap,
+      fill = continent) +
+  geom_jitter(height = 0,
+              width = .4) +
+  geom_boxplot()
+```
+
+3. 
+
+```{r plastic-waste raincloud}
 
 ggplot(data = plastic_waste) +
   aes(x = continent,
@@ -100,10 +121,9 @@ ggplot(data = plastic_waste) +
 
 ```
 
+4. The density plot and jitter show the distribution of the data points better than the box plot. It accounts more for outliers as well. 
 
-
-
-### Exercise 5
+### 17.4.3 Exercise 3 
 
 Describe the relationship
 It seems like there is a positive relationship between the two variables with increasing variability. 
