@@ -35,7 +35,14 @@ gapminder |>
 
 ```{r mutate change in life exp}
 
+gap_inc <- gapminder |> 
+  arrange(year) |> 
+  group_by(country) |>
+  mutate(lifeExp_inc = lifeExp - lag(lifeExp))
+print(gap_inc)
 
+gap_inc |> 
+  tidyr::drop_na()
 ```
 
 ### 24.2.4 1.4 
