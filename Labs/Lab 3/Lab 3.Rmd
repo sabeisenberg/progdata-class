@@ -62,3 +62,110 @@ gapminder |>
 
 ```
 
+## 24.3 Exercise 2: Explore two variables with dplyr and ggplot2 
+
+```{r viewing gapminder}
+gapminder_data <- gapminder
+```
+
+
+### 24.3.1  2.1 
+
+```{r explore lifeExp and pop }
+gapminder |> 
+  summarize(
+    mean = mean(lifeExp),
+    sd = sd(lifeExp), 
+    range = range(lifeExp)
+  ) 
+
+gapminder |>
+  summarize(
+    mean = mean(pop), 
+    sd = sd(pop), 
+    range = range(pop)
+  )
+```
+
+
+```{r scatter pop life Exp}
+
+gapminder |> 
+  ggplot() +
+  aes(x = pop/100000000, y = lifeExp, color = continent) +
+  geom_point(alpha = .5) +
+  scale_x_continuous(
+    name = "Population in 100 Millions"
+  )
+
+```
+
+### 24.3.2 2.2 
+
+```{r explore continent and pop}
+gapminder |>
+  group_by(continent) |> 
+  summarize(
+    mean = mean(pop), 
+    sd = sd(pop), 
+    range = range(pop),
+    n = n()
+  )
+```
+
+```{r jitter plot cont by pop}
+
+ggplot(gapminder) +
+  aes(x = continent,
+      y = pop/100000000,
+      fill = continent,
+      color = continent) +
+  geom_jitter(height = 0,
+              width = .4, 
+              alpha = .2) +
+  scale_y_continuous(
+    name = "Population in 100 Millions"
+  )
+
+```
+
+```{r jitter and add boxplot}
+
+ggplot(gapminder) +
+  aes(x = continent,
+      y = log(pop),
+      fill = continent,
+      color = continent) +
+  geom_jitter(height = 0,
+              width = .4,
+              alpha = .5) +
+  geom_boxplot(color = "black",
+               alpha = .2) +
+  scale_y_continuous(
+    name = "Log population"
+  )
+```
+
+```{r raincloud plot}
+
+ggplot(na.omit(gapminder)) +
+  aes(y = continent,
+      x = log(pop),
+      fill = continent,
+      color = continent) +
+  geom_jitter(height = .15, 
+              alpha = .3) +
+  geom_boxplot(color = "black",
+               alpha = .5,
+               width = .1,
+               size = .5) +
+  ggdist::stat_slab(height = .3,
+                    color = "black",
+                    size = .2,
+                    alpha = .5,
+                    position = position_nudge(y = .2))
+```
+
+
+
+
