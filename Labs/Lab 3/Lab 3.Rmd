@@ -1,0 +1,39 @@
+---
+title: "Lab 3"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(gapminder)
+library(tidyverse)
+```
+
+## 24.2 Exercise 1: Basic dplyr 
+
+### 24.2.1 1.1 
+
+```{r filter gapminder three countries}
+
+gapminder_filter1970 <- gapminder |> 
+  filter(country %in% c("Albania", "Austria", "China") & year == 1970:1979)
+
+print(gapminder_filter1970)
+```
+
+### 24.2.2 1.2 
+
+```{r pipe filter and select}
+gapminder |> 
+    filter(country %in% c("Albania", "Austria", "China") & year == 1970:1979) |>
+  select(country, gdpPercap) |>
+  print()
+  
+
+```
+
+### 24.2.3 1.3 
+
+```{r mutate change in life exp}
+
+```
+
