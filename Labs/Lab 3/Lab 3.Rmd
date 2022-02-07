@@ -48,7 +48,9 @@ gap_inc |>
 ### 24.2.4 1.4 
 
 ```{r max GDP per cap per country}
-
+gapminder |> 
+  group_by(country) |> 
+summarize(max = max(lifeExp)) 
 
 ```
 
