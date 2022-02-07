@@ -35,5 +35,30 @@ gapminder |>
 
 ```{r mutate change in life exp}
 
+
+```
+
+### 24.2.4 1.4 
+
+```{r max GDP per cap per country}
+
+
+```
+
+### 24.2.5 1.5
+
+```{r scatter Canada life Exp vs GDP}
+
+gapminder |> 
+  filter(country == "Canada") |>
+  ggplot() +
+  aes(x = gdpPercap, y = lifeExp) +
+  geom_point() +
+  scale_x_continuous(
+    name = "GDP per capita", 
+    trans = "log10", 
+    labels = scales::dollar_format()
+  )
+
 ```
 
