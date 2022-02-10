@@ -43,6 +43,16 @@ green_data <- green_data |>
 ```
 
 
+```{r create means}
+
+green_data <- green_data |>
+  mutate(greentotal = (green1 + green2 + green3 + green4 + green5)/5)
+
+```
+
+
+
+
 ```{r reverse }
 ## This is the better way to do it but I was getting an error - will practice later 
 
@@ -67,6 +77,16 @@ green_data <- green_data |>
 #  head()
 ```
 
+1. 
+
+```{r inspect items}
+
+ggplot(green_data) +
+  aes(x = ,
+      y = flipper_length_mm) +
+  geom_point()
+
+```
 
 
 
