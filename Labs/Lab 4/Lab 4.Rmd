@@ -16,78 +16,140 @@ green_data <- readr::read_csv(here::here("data", "green_data.csv"))
 
 
 
-reverse green 2 
-comp 6 reverse
-comp 7-10
-intel 7-10
-open 7-10
-
-
-```{r mutate reverse}
-green_data <- green_data |>
-  mutate(green2 = 6 - green2, 
-         comp6 = 6 - comp6, 
-         comp7 = 6 - comp7, 
-         comp8 = 6 - comp8, 
-         comp9 = 6 - comp9, 
-         comp10 = 6 - comp10, 
-         intel7 = 6 - intel7, 
-         intel8 = 6 - intel8, 
-         intel9 = 6 - intel9, 
-         intel10 = 6 - intel10,
-         open7 = 6 - open7, 
-         open8 = 6 - open8, 
-         open9 = 6 - open9, 
-         open10 = 6 - open10)
-
-```
-
-
-```{r create means}
-
-green_data <- green_data |>
-  mutate(greentotal = (green1 + green2 + green3 + green4 + green5)/5)
-
-```
-
-
-
-
-```{r reverse }
-## This is the better way to do it but I was getting an error - will practice later 
-
-
-#greendict <- dictionary |>
-#  as_tibble(rownames = "item")
-
-#reversed <- greendict |>
-#  filter(Keying == -1) |>
-#  pull(item)
-
-
-```
-
-```{r reverse2}
-#green_data |>
-##  mutate(across(
-#    all_of(reversed),
-##    \(x) recode(x, "5" = 1, "4" = 2, "3" = 3, "2" = 4, "1" = 5),
-#    .names = "{.col}r"
-#  )) |>
-#  head()
-```
-
 1. 
 
 ```{r inspect items}
+green_data |>
+  pull(open10) |> 
+  unique() # sometimes NA values are listed as extreme values, such as -99. check data! especially if from repository or qualtrics
+```
 
-ggplot(green_data) +
-  aes(x = ,
-      y = flipper_length_mm) +
-  geom_point()
+
+```{r inspect items2}
+green_data |> 
+  select(-id) |> 
+  unlist() |>
+  unique() # find unique values in all of data. -99 is not what you want in any of your data, so you can remove -99. 
+
+```
+
+```{r remove -99}
+
+green_data <- green_data |>
+  mutate( #make new data
+    across( #across mult columns
+      -id, #but not id
+      \(x) recode(x, "1" = 1, "2" = 2, "3" = 3, "4" = 4, "5" = 5, "-99" = NA_real_) # /(x) syntax means making a new function; \(data, x, what do I want it to do). so \(x) is make a new function function() with this specific operation
+    )
+  ) 
+
+#specify NA_real_ want NA as a real number
+
+#Can also use NA if function. replace line below -id with \(x) na_if(x, -99) 
+
+```
+
+```{r histogram open10}
+
+green_data |> 
+  pull(open10) |> 
+  hist()
+
+```
+
+2. 
+
+```{r filter and select reverse code items}
+reversed <- dictionary |> 
+  filter(Keying == -1) |> 
+  pull(Item) #if you use select, it will select the items within the data frame rather than pulling the vector out of the data frame
+```
+
+```{r reverse code}
+
+green_data <- green_data |>
+  mutate(
+    across(all_of(reversed), #could also replace it with the function assigned to reversed but would get messy. if you  use all of requires all of the variables to be there, any of says "if any of them are there" but won't stop you if you ask for a column that isn't there. 
+    \(x) recode(x, "1" = 5, "2" = 4, "3" = 3, "4" = 2, "5" = 1)
+  ))
 
 ```
 
 
+```{r creating a function for reverse}
+#reverse_item <- \(x) {
+#recode(x, "1" = 5, "2" = 4, "3" = 3, "4" = 2, "5" = 1)
+#}
+# if you create this function, you can now recode with just reverse_item() 
+```
+
+```{r alternative for recode}
+#green_data <- green_data |>
+#  mutate(
+#    across(all_of(reversed), 
+#    recode, 
+#    "1" = 5, "2" = 4, "3" = 3, "4" = 2, "5" = 1)
+#  )) can also do this but it won't look as similar to how you would write it for a single column 
+```
+
+```{r compute total scores}
+
+green_data <- green_data |> 
+  rowwise() |> #makes each row its own group does comp sep
+  mutate (
+    green_total = mean(c_across(green1:green5), na.rm = TRUE), 
+    comp_total = mean(c_across(comp1:comp10), na.rm = TRUE), 
+    intel_total = mean(c_across(intel1:intel10), na.rm = TRUE), 
+    open_total = mean(c_across(open1:open10), na.rm = TRUE), 
+    .before = everything () 
+  ) |> 
+  ungroup()
+    
+                       
+```
+
+3. 
+
+```{r rescale 1-5 to 0-100}
+
+#green_data <- green_data |>
+#  mutate(
+#    across(green_total:open_total, 
+#           \(x) 100 * (x - 1) / (5 - 1))
+#  )
+# what proportion did they get out of total. max score is 5. divide x/5 if they got 4/5, that is the proportion of points they got. BUT, scale doesn't start at 0. scale starts at 1. so, subtract 1 from the numerator and denom. (x-1)/(x-5) expresses in max possible points. this is bw preferred way of standardizing variables. 
+
+green_data <- green_data |> 
+  mutate(
+    across(
+      green_total:open_total, 
+      \(x) datawizard::change_scale(x, range = c(1,5), to = c(0, 100)), 
+      .names = "{.col}_pomp"
+    ), 
+    .after = open_total
+  ) # bw function for changing the variables to 0 to 100 
+
+```
+
+4. 
+```{r histogram variables}
+ggplot(green_data) +
+  aes(x = green_total_pomp) +
+  geom_histogram() 
+```
+
+
+5. 
+
+```{r scatter variables}
+green_data |> 
+  filter(!is.na(student)) |> #filter for rows where student is not na. can use drop_na(student) instead 
+  ggplot() +
+  aes(x = open_total_pomp, y = green_total_pomp, color = factor(student)) +
+  geom_point() + 
+  geom_smooth(method = lm) #good for exploratory fitting lines without doing a model first. 
+```
+
+There does not seem to be a relationship between students and non-students and their green reputation 
 
 
