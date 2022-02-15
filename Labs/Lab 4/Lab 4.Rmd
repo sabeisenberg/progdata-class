@@ -131,7 +131,8 @@ green_data <- green_data |>
 
 ```
 
-4. 
+4.
+
 ```{r histogram variables}
 ggplot(green_data) +
   aes(x = green_total_pomp) +
@@ -151,5 +152,48 @@ green_data |>
 ```
 
 There does not seem to be a relationship between students and non-students and their green reputation 
+
+
+```{r factor student}
+green_data <- green_data |> 
+  mutate(green_data, Student = factor(student, levels = c("1", "2"), labels = c("no", "yes")))
+```
+
+
+6. 
+```{r raincloud plot}
+
+green_data |> 
+  filter(!is.na(Student)) |> 
+  ggplot() +
+  aes(x = green_total_pomp,
+      y = Student,
+      color = Student, fill = Student) +
+  geom_jitter(height = .15) +
+  geom_boxplot(color = "black",
+               alpha = .5,
+               width = .1,
+               size = .5) +
+  ggdist::stat_slab(height = .3,
+                    color = "black",
+                    size = .2,
+                    alpha = .5,
+                    position = position_nudge(y = .2))
+```
+
+
+7. 
+
+```{r summary table}
+green_data |>
+  group_by(Student) |>
+  summarize(across(green_total_pomp:open_total_pomp,
+            mu = mean(),
+            sigma = sd(),
+            median = median(), 
+            min = min(), 
+            max = max()))
+
+```
 
 
