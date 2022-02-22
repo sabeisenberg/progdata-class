@@ -1,0 +1,29 @@
+---
+title: "Lab 5A"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+lotr  <- read_csv("https://raw.githubusercontent.com/jennybc/lotr-tidy/master/data/lotr_tidy.csv") |> 
+  rename(Species = Race)
+```
+
+1. In this data, the column headers are variable names instead of values (tidy). Each column stores only one, rather than multiple, variable (tidy).
+
+```{r pivot wide}
+(lotr_wide <- lotr |> 
+  pivot_wider(id_cols = c(Film, Gender), 
+              names_from = Species, 
+              values_from = Words))
+```
+
+2. 
+```{r pivot long}
+lotr_wide |> 
+  pivot_longer(cols = c(Elf:Man), 
+               names_to  = "Species", 
+               values_to = "Words")
+
+```
+
