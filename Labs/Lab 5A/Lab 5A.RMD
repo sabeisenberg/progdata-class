@@ -9,8 +9,9 @@ lotr  <- read_csv("https://raw.githubusercontent.com/jennybc/lotr-tidy/master/da
   rename(Species = Race)
 ```
 
-1. In this data, the column headers are variable names instead of values (tidy). Each column stores only one, rather than multiple, variable (tidy).
+1. In this data, the column headers are variable names instead of values (tidy). Each column stores only one, rather than multiple, variable (tidy). If I wanted to run an analysis with the relevant variables, I would be able to. 
 
+2.
 ```{r pivot wide}
 (lotr_wide <- lotr |> 
   pivot_wider(id_cols = c(Film, Gender), 
@@ -18,7 +19,7 @@ lotr  <- read_csv("https://raw.githubusercontent.com/jennybc/lotr-tidy/master/da
               values_from = Words))
 ```
 
-2. 
+3.
 ```{r pivot long}
 lotr_wide |> 
   pivot_longer(cols = c(Elf:Man), 

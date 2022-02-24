@@ -1,0 +1,78 @@
+---
+title: "Lab 5B"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+set.seed(123)
+missing_w2_parent <- sample(1:500, 30)
+missing_w2_child <- c(missing_w2_parent[1:5], sample(1:500, 25))
+family  <- read_csv(
+  "https://raw.githubusercontent.com/bwiernik/progdata/main/inst/tutorials/data/family_data.csv"
+) |> 
+  mutate(
+    across(
+      starts_with("w2") & contains("parent"),
+      ~ ifelse(family_id %in% missing_w2_parent, NA_real_, .x)
+    ),
+    across(
+      starts_with("w2") & contains("child"),
+      ~ ifelse(family_id %in% missing_w2_child, NA_real_, .x)
+    )
+  )
+```
+
+
+```{r data table}
+family |> 
+  DT::datatable(rownames = FALSE)
+```
+
+1. 
+
+```{r pivot longer row score}
+
+family_longest <- family |> 
+  pivot_longer( cols = w1_comm_parent:w2_satis_child,
+  names_to = c("wave", "scale", "family_member"), 
+  names_sep = "_",
+  values_to = "score")
+
+print(family_longest)
+
+```
+
+2. 
+
+```{r pivot longer row person}
+
+family_long <- family |> 
+  pivot_longer(cols = w1_comm_parent:w2_satis_child,
+  names_to = c("wave", ".value", "family_member"), 
+  names_sep = "_")
+
+print(family_long)
+
+```
+
+3. 
+
+```{r filter for NA}
+
+family_longest |>
+  summarise(count = sum(is.na(score)))
+
+
+```
+
+There are 120 score columns with missing values
+
+```{r filter for NA id}
+
+family_longest_na <- family_longest |> 
+  filter(wave == "w2" & is.na(score))
+
+```
+
+You can open the family_longest_na data set to see the family ID's with missing NA values for w2. It was easier to do it with the longest data set. With the wider data set (family_long), you would have had to specify filtering NA for both scales. With the widest data set (family), you would have had to filter 4 variable names as na, one for each combination of w2's and scores. 
