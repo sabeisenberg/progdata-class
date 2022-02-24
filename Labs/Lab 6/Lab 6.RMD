@@ -1,0 +1,68 @@
+---
+title: "Lab 6"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+```
+
+# Part 34 Lab 06: Join those tables! 
+
+## 34.1 Exercise 1: singer 
+
+```{r download data singer}
+
+songs <- read_csv("https://raw.githubusercontent.com/bwiernik/progdata-class/master/data/singer/songs.csv")
+locations <- read_csv("https://raw.githubusercontent.com/bwiernik/progdata-class/master/data/singer/loc.csv")
+
+(time <- as_tibble(songs) |> 
+   rename(song = title))
+
+(album <- as_tibble(locations) |> 
+   select(title, everything()) |> 
+   rename(album = release,
+          song  = title))
+
+```
+
+1 & 2. 
+```{r songs and albums }
+time_1 <- time |> 
+  left_join(album, by = "song")
+```
+
+We know the corresponding album for songs 2-8, 11, 13, and 19-22 
+
+3. 
+
+```{r songs and year but not album}
+time_2 <- time_1 |> 
+  anti_join(album, by = "song")
+
+```
+
+We have a year, but not an album for: 
+Corduroy, Martin_Doom!It's Seven O'Clock, Leaves And Sand, Comb Your Hair, Mine Again, Don't Forget About Us, Babydoll, and Vision of Love. 
+
+4. 
+
+```{r artists in time but not album}
+
+time |> 
+  anti_join(album, by = "artist_name")
+
+```
+
+Mariah Carey is in album but not time. 
+
+5.
+
+```{r two tibbles into 1 }
+album_time <- album |> 
+  left_join(time, by = "song")
+```
+
+Unsure how to merge the artist name columns
+
+
