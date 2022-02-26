@@ -65,4 +65,35 @@ album_time <- album |>
 
 Unsure how to merge the artist name columns
 
+## 34.2 Exercise 2: LOTR 
+
+```{r load data LOTR}
+fell <- read_csv("https://raw.githubusercontent.com/jennybc/lotr-tidy/master/data/The_Fellowship_Of_The_Ring.csv")
+ttow <- read_csv("https://raw.githubusercontent.com/jennybc/lotr-tidy/master/data/The_Two_Towers.csv")
+retk <- read_csv("https://raw.githubusercontent.com/jennybc/lotr-tidy/master/data/The_Return_Of_The_King.csv")
+```
+
+1. 
+
+```{r stack LOTR tibbles}
+
+bind_rows(fell, retk, ttow)
+
+```
+
+2. 
+
+```{r races fell}
+
+fell |> 
+  anti_join(retk, by = "Race") |> 
+  anti_join(ttow, by = "Race")
+  
+
+```
+
+All races are present in each movie. 
+
+
+
 
