@@ -17,6 +17,10 @@ My name is Sabrina Eisenberg. I am a ~~fifth~~ first year PhD student in the CNS
 
 https://github.com/sabeisenberg/Portfolio1-Analysis
 
+### Analysis 2
+
+https://github.com/sabeisenberg/Portfolio2-Analysis
+
 ### Website
 
 https://github.com/sabeisenberg/sabeisenbergweb
